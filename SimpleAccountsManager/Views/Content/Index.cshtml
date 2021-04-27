@@ -1,0 +1,65 @@
+﻿@model X.PagedList.IPagedList<SimpleAccountsManager.Models.OutputAccount>
+@using X.PagedList.Mvc.Core
+
+<link href="/css/pagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewData["Title"] = "Your Accounts";
+}
+<section class="container pt-2">
+    <header>
+        <p class="section-header text-info w-75 mx-auto mt-4">
+            Manage Your accounts below!
+        </p>
+    </header>
+    <div class="row text-center pt-3 pb-2 border-bottom box-shadow">
+        <div class="col-md-2 col-sm-12 align-middle border-right">Account Name</div>
+        <div class="col-md-2 col-sm-12 align-middle border-right">Description</div>
+        <div class="col-md-2 col-sm-12 align-middle border-right">Email</div>
+        <div class="col-md-2 col-sm-12 align-middle border-right">Login</div>
+        <div class="col-md-2 col-sm-12 align-middle border-right">Password</div>
+        <div class="col-md-2 col-sm-12">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-square"></i>
+                Add New
+            </a>
+        </div>
+    </div>
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+            <div class="row align-items-center text-center py-2 border-bottom">
+                <div class="col-md-2 col-sm-12 align-middle border-right">@item.StoredAccountDetails.AccountName</div>
+                <div class="col-lg-2 col-md-3 col-sm-12 align-middle border-right">@item.StoredAccountDetails.AccountDescription</div>
+                <div class="col-lg-2 col-md-3 col-sm-12 align-middle border-right">@item.StoredAccountDetails.Email</div>
+                <div class="col-md-2 col-sm-12 align-middle border-right">@item.StoredAccountDetails.Login</div>
+                <div class="col-md-2 col-sm-12 align-middle border-right">@item.Password</div>
+                <div class="col-lg-2 col-md-12 align-middle btn-group">
+                    <a asp-controller="Content" asp-action="Edit" asp-route-id="@item.Id" class="btn ml-sm-auto col-lg-6 col-md-1 col-sm- btn-info mx-1 p-1">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a onclick="ConfirmDelete('@item.StoredAccountDetails.AccountName', '@item.Id')"
+                       class="btn btn-danger mr-sm-auto col-lg-6 col-md-1 col-sm-4 mx-1 p-1">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </div>
+            </div>
+        }
+        <div class="row pt-2 text-center">
+            <div class="mx-auto">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="text-dark">You have no accounts to manage! Want to add new one?</p>
+    }
+    @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+
+
+
+</section>
+@section Scripts {
+    <script src="~/js/scripts.js"></script>
+}

@@ -1,0 +1,62 @@
+﻿@model OutputAccount
+@{ 
+    ViewData["Title"] = "Add Account";
+}
+<section class="container pt-2">
+    <div class="card border-0 mx-auto col-lg-8 p-0">
+        <div class="card-header bg-transparent card-title">
+            <p class="section-header text-info mt-4">
+                Add New Account to Your Base
+            </p>
+        </div>
+        <div class="card-body mx-auto col-lg-8 col-md-6">
+            <section>
+                <form asp-action="Create" method="post" class="px-sm-4" autocomplete="off">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    @*<input asp-for="StoredAccountDetails.AccountId" hidden />
+                <input asp-for="StoredAccountDetails.DetailsId" hidden />*@
+                    <div class="form-group">
+                        <label asp-for="StoredAccountDetails.AccountName"></label>
+                        <input asp-for="StoredAccountDetails.AccountName" class="form-control" />
+                        <span asp-validation-for="StoredAccountDetails.AccountName" class="text-warning"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StoredAccountDetails.AccountDescription"></label>
+                        <input asp-for="StoredAccountDetails.AccountDescription" class="form-control" />
+                        <span asp-validation-for="StoredAccountDetails.AccountDescription" class="text-warning"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StoredAccountDetails.Email"></label>
+                        <input asp-for="StoredAccountDetails.Email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StoredAccountDetails.Login"></label>
+                        <input asp-for="StoredAccountDetails.Login" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" />
+                    </div>
+                    <div class="row form-group text-center">
+                        <div class="col-6 text-center w-100">
+                            <button type="submit" class="btn btn-primary w-100">Add</button>
+                        </div>
+                        <div class="col-6 text-center w-100">
+                            <a asp-controller="Content" asp-action="Index" class="btn btn-secondary w-100">Back</a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    
+    @*<div class="row w-75 mx-auto pb-2 border-bottom box-shadow">
+        <div class="col-md-4 mx-auto">
+            
+        </div>
+    </div>*@
+
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
